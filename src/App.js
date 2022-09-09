@@ -196,7 +196,6 @@ function App() {
         <button onClick={handleUsdcMint}>Mint MGN</button>
       </form>
       <a href="https://app.uniswap.org/#/swap?chain=arbitrum&outputCurrency=0xFc77b86F3ADe71793E1EEc1E7944DB074922856e" target='blank' rel='noopener noreferrer'>Buy MGN</a>
-      <button onClick={getMugenUSDCPrice}>Check</button>
     </div>
   );
 }
