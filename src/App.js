@@ -5,6 +5,12 @@ import getWeb3 from "./getWeb3";
 import MugenContract from './contracts/MugenTreasury.json'
 import usdcContract from './contracts/usdc.json'
 
+import { ethers } from "ethers";
+import abi from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json'
+import quoterAbi from '@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json'
+
+import {} from './helpers'
+
 import './App.css';
 
 function App() {
@@ -89,12 +95,15 @@ function App() {
     
       setMgnMintPrice(mgnMintPrice.slice(0, 3) + '.' +  mgnMintPrice.substring(3))
       setMgnMarketPrice(mgnMarketPrice.data.pair.priceUsd)
+
+      console.log(mgnMintPrice.slice(0, 3) + '.' +  mgnMintPrice.substring(3))
+      console.log(mgnMarketPrice.data.pair.priceUsd)
     }
-  }, 5000);
+  }, 10000);
 
   return (
     <div className="App">
-      <h3>Prices are auto updated every 5 seconds</h3>
+      <h3>Prices are auto updated every 10 seconds</h3>
       <p>Your account: {accounts[0]}</p>
       <p>MGN mint price: ${mgnMintPrice}</p>
       <p>MGN market price: ${mgnMarketPrice}</p>
