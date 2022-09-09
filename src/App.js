@@ -170,6 +170,7 @@ function App() {
       <p>Your account: {accounts[0]}</p>
       <p>MGN mint price: ${mgnMintPrice}</p>
       <p>MGN market price: ${mgnMarketPrice}</p>
+      {depositCap &&<p>Deposit cap: ${parseFloat(ethers.utils.formatUnits(depositCap.toString(), 18)).toLocaleString('en')}</p>}
       <p>Deposit cap filled by {(valueDeposited / depositCap * 100).toFixed(2)}%</p>
       <p>Your USDC balance: {usdcBalance} USDC</p>
       <form>
