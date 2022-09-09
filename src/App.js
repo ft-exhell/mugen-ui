@@ -31,6 +31,9 @@ function App() {
     e.preventDefault()
     try {
       await mugenTreasury.methods['deposit(address,uint256)']('0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8', (new BigNumber(usdcToMintWith).multipliedBy(new BigNumber(1e+6)).toFixed())).send({from: accounts[0]})
+
+      const usdcBalance = await usdc.methods.balanceOf(accounts[0]).call()
+      setUsdcBalance(usdcBalance)
     } catch (err) {
       console.log(err.message)
     }
