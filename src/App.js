@@ -14,6 +14,7 @@ function App() {
   const [accounts, setAccounts] = useState([])
   const [mgnMintPrice, setMgnMintPrice] = useState(null)
   const [mgnMarketPrice, setMgnMarketPrice] = useState(null)
+  const [usdcBalance, setUsdcBalance] = useState(null)
   const [usdcToApprove, setUsdcToApprove] = useState(0)
   const [usdcToMintWith, setUsdcToMintWith] = useState(0)
 
@@ -55,13 +56,15 @@ function App() {
         );
 
         const mgnMintPrice = await mugenTreasury.methods.pricePerToken().call()
+        const usdcBalance = await usdc.methods.balanceOf(accounts[0]).call()
         const mgnMarketPrice = await axios.get('https://api.dexscreener.com/latest/dex/pairs/arbitrum/0xCe3dC36Cd501C00f643a09f2C8d9b69Fb941bB74')
-
+        
         // Set web3, accounts, contracts and prices.
         setWeb3(web3)
         setAccounts(accounts)
         setMugenTreasury(mugenTreasury)
         setUsdc(usdc)
+        setUsdcBalance(web3.utils.BN(usdcBalance).toString().slice(0, -6))
         setMgnMintPrice(mgnMintPrice.slice(0, 3) + '.' +  mgnMintPrice.substring(3))
         setMgnMarketPrice(mgnMarketPrice.data.pair.priceUsd)
       } catch (error) {
@@ -83,17 +86,16 @@ function App() {
     
       setMgnMintPrice(mgnMintPrice.slice(0, 3) + '.' +  mgnMintPrice.substring(3))
       setMgnMarketPrice(mgnMarketPrice.data.pair.priceUsd)
-
-      console.log(mgnMintPrice)
-      console.log(mgnMarketPrice.data.pair.priceUsd)
     }
   }, 5000);
 
   return (
     <div className="App">
+      <h3>Prices are auto updated every 5 seconds</h3>
       <p>Your account: {accounts[0]}</p>
       <p>MGN mint price: ${mgnMintPrice}</p>
       <p>MGN market price: ${mgnMarketPrice}</p>
+      <p>Your USDC balance: {usdcBalance} USDC</p>
       <form>
         <label>
           <span>Amount USDC to Approve</span>
