@@ -76,6 +76,19 @@ function App() {
     init();
   }, [])
 
+  setInterval(async () => {
+    if (mugenTreasury) {
+      const mgnMintPrice = await mugenTreasury.methods.pricePerToken().call()
+      const mgnMarketPrice = await axios.get('https://api.dexscreener.com/latest/dex/pairs/arbitrum/0xCe3dC36Cd501C00f643a09f2C8d9b69Fb941bB74')
+    
+      setMgnMintPrice(mgnMintPrice.slice(0, 3) + '.' +  mgnMintPrice.substring(3))
+      setMgnMarketPrice(mgnMarketPrice.data.pair.priceUsd)
+
+      console.log(mgnMintPrice)
+      console.log(mgnMarketPrice.data.pair.priceUsd)
+    }
+  }, 5000);
+
   return (
     <div className="App">
       <p>Your account: {accounts[0]}</p>
